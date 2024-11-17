@@ -46,8 +46,8 @@ public class RendezVousServiceImpl implements RendezVousService {
     @Override
     public RendezVous updateRendezVous(Long id, RendezVousReq rendezVousReq) {
         RendezVous rendezVous = getRendezVousById(id);
-        rendezVous.setId_medecin(rendezVousReq.getId_medecin().getId());
-        rendezVous.setId_patient(rendezVousReq.getId_patient().getId());
+        rendezVous.setId_medecin(rendezVousReq.getId_medecin());
+        rendezVous.setId_patient(rendezVousReq.getId_patient());
         rendezVous.setDate(rendezVousReq.getDate());
         rendezVous.setHeure(rendezVousReq.getHeure());
         rendezVousRepo.save(rendezVous);

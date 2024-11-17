@@ -15,8 +15,8 @@ import java.util.Date;
 @Builder
 
 public class RendezVousReq {
-    private PatientDTO id_patient;
-    private MedecinDTO id_medecin;
+    private Long id_patient;
+    private Long id_medecin;
     @Column(name = "date")
     private Date date;
     @Column(name = "heure")

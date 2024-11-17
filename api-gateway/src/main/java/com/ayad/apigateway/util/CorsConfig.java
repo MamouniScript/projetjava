@@ -1,19 +1,25 @@
 package com.ayad.apigateway.util;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.reactive.CorsWebFilter;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
 @Configuration
-public class CorsConfig implements WebMvcConfigurer {
+public class CorsConfig {
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        // Configuration CORS pour toutes les routes de l'API Gateway
-        registry.addMapping("/**") // Toutes les routes
-                .allowedOrigins("http://localhost:5173") // Frontend React
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Méthodes autorisées
-                .allowedHeaders("*") // Autorise tous les en-têtes
-                .allowCredentials(true); // Autoriser les cookies si nécessaire
+    @Bean
+    public CorsWebFilter corsWebFilter() {
+        CorsConfiguration corsConfig = new CorsConfiguration();
+        corsConfig.addAllowedOriginPattern("*"); // Permet toutes les origines
+        corsConfig.addAllowedMethod("*");       // Permet toutes les méthodes HTTP
+        corsConfig.addAllowedHeader("*");       // Permet tous les en-têtes
+        corsConfig.setAllowCredentials(true);   // Autorise les cookies / credentials
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfig);
+
+        return new CorsWebFilter(source);
     }
 }
