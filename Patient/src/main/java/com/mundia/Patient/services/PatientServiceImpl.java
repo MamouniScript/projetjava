@@ -47,17 +47,18 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Patient updatePatient(Long id, PatientReq patientReq) {
-        return null;
+        Patient patient = getPatientById(id);
+        patient.setNom(patientReq.getNom());
+        patient.setAge(patientReq.getAge());
+        patient.setAdresse(patientReq.getAdresse());
+        patient.setContact(patientReq.getContact());
+        patientRepo.save(patient);
+        return patient;
     }
-
-
 
     @Override
     public void deletePatient(Long id) {
-
+        patientRepo.delete(getPatientById(id));
     }
-
-
-
 
 }
