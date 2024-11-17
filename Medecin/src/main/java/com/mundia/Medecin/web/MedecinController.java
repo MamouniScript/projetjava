@@ -32,5 +32,18 @@ public class MedecinController {
         return medecinService.getAllMedecins();
     }
 
+    @PostMapping("/update/{id}")
+    public Medecin updateMedecin (@PathVariable Long id, @RequestBody MedecinReq medecinReq){
+        return medecinService.updateMedecin(id, medecinReq);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteMedecin (@PathVariable Long id){
+        if(medecinService.getMedecin(id) != null){
+            medecinService.deleteMedecin(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
 
 }
