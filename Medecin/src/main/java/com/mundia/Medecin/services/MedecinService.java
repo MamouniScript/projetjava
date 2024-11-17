@@ -10,7 +10,7 @@ public interface MedecinService {
     List<Medecin> getAllMedecins();
     List<Medecin> getMedecinByName(String nom);
     Medecin addMedecin(MedecinReq medecin);
-    Medecin updateMedecin(MedecinReq medecin);
+    Medecin updateMedecin(Long id, MedecinReq medecin);
     void deleteMedecin(Long id);
 
 }
