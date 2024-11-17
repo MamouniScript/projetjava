@@ -22,42 +22,40 @@ public class MedecinServiceImpl implements MedecinService {
     final WebClient webClient;
 
     @Override
-    public Medecin getMedecin(Long id) {
-        Optional<Medecin> optionalMedecin= medecinRepo.findById(id);
+    public Medecin getMedecinById(Long id) {
+        Optional<Medecin> optionalMedecin = medecinRepo.findById(id);
         if(optionalMedecin.isPresent()){
             return optionalMedecin.get();
         }else {
-            throw new EntityNotFoundException("Medecin n'existe pas!");
+            throw new EntityNotFoundException("Medecin with id " + id + " not found");
         }
     }
 
     @Override
     public List<Medecin> getAllMedecins() {
-        List<Medecin> medecins = medecinRepo.findAll();
-        return medecins;
-    }
-    @Override
-    public List<Medecin> getMedecinByName(String nom) {
-        List<Medecin> medecins = medecinRepo.findAllByNom(nom);
-        return medecins;
+        return medecinRepo.findAll();
     }
 
     @Override
-    public Medecin addMedecin(MedecinReq Medecin) {
-        Medecin medecin1 = medecinMapper.fromMedecinReq(Medecin);
-        medecinRepo.save(medecin1);
-        return medecin1;
+    public Medecin addMedecin(MedecinReq medecinReq) {
+        Medecin medecin = medecinMapper.fromMedecinReq(medecinReq);
+        medecinRepo.save(medecin);
+        return medecin;
     }
 
     @Override
-    public Medecin updateMedecin(MedecinReq Medecin) {
-        return null;
+    public Medecin updateMedecin(Long id, MedecinReq medecinReq) {
+        Medecin medecin = getMedecinById(id);
+        medecin.setNom(medecinReq.getNom());
+        medecin.setSpecialite(medecinReq.getSpecialite());
+        medecin.setContact(medecinReq.getContact());
+        medecinRepo.save(medecin);
+        return medecin;
     }
 
     @Override
     public void deleteMedecin(Long id) {
-
+        medecinRepo.delete(getMedecinById(id));
     }
-
 
 }

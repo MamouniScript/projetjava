@@ -6,11 +6,10 @@ import com.mundia.Medecin.entities.Medecin;
 import java.util.List;
 
 public interface MedecinService {
-    Medecin getMedecin(Long id);
+    Medecin getMedecinById(Long id);
     List<Medecin> getAllMedecins();
-    List<Medecin> getMedecinByName(String nom);
-    Medecin addMedecin(MedecinReq medecin);
-    Medecin updateMedecin(MedecinReq medecin);
+    Medecin addMedecin(MedecinReq medecinReq);
+    Medecin updateMedecin(Long id, MedecinReq medecinReq);
     void deleteMedecin(Long id);
 
 }

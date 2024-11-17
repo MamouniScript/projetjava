@@ -9,8 +9,11 @@ import java.util.List;
 
 public interface RendezVousRepo extends JpaRepository<RendezVous, Long> {
     List<RendezVous> findAll();
-    List<RendezVous> findByMedecin(Long idMedecin);
-    List<RendezVous> findByPatient(Long idPatient);
+
     List<RendezVous> findByDate(Date date);
-    List<RendezVous> findByTime(Time time);
+
+
+    List<RendezVous> findByHeure(Time time);
+
+
 }

@@ -8,12 +8,10 @@ import java.util.Date;
 import java.util.List;
 
 public interface RendezVousService {
-
-    List<RendezVous> getAllRendezVous();
-    List<RendezVous> findByMedecin(Long idMedecin);
-    List<RendezVous> findByPatient(Long idPatient);
-    List<RendezVous> findByDate(Date date);
-    List<RendezVous> findByTime(Time time);
+    RendezVous getRendezVousById(Long id);
+    List<RendezVous> getAllRendezVouss();
     RendezVous addRendezVous(RendezVousReq rendezVousReq);
+    RendezVous updateRendezVous(Long id, RendezVousReq rendezVousReq);
+    void deleteRendezVous(Long id);
 
 }
