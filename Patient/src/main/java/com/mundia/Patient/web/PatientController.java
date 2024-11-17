@@ -30,5 +30,21 @@ public class PatientController {
         return patientService.getAllPatients();
     }
 
+    @PostMapping("/update/{id}")
+    public Patient editPatient (@PathVariable Long id, @RequestBody PatientReq patientReq){
+        if (id != null){
+            return patientService.updatePatient(id, patientReq);
+        }
+        return null;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deletePatient (@PathVariable Long id){
+        if(patientService.getPatientById(id) != null){
+            patientService.deletePatient(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
 
 }
