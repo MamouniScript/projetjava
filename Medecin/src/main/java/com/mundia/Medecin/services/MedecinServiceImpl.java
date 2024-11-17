@@ -50,13 +50,22 @@ public class MedecinServiceImpl implements MedecinService {
     }
 
     @Override
-    public Medecin updateMedecin(MedecinReq Medecin) {
+    public Medecin updateMedecin(Long id, MedecinReq medecinReq) {
+        if (getMedecin(id) != null){
+            Medecin medecin = getMedecin(id);
+            medecin.setNom(medecinReq.getNom());
+            medecin.setSpecialite(medecinReq.getSpecialite());
+            medecin.setContact(medecinReq.getContact());
+            return medecin;
+        }
         return null;
     }
 
     @Override
     public void deleteMedecin(Long id) {
-
+        if (getMedecin(id) != null){
+            medecinRepo.delete(getMedecin(id));
+        }
     }
 
 
